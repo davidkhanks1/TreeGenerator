@@ -10,6 +10,16 @@ package treegenerator;
  *
  * @author davidkhanks
  */
-public class DisplayProperties {
-    
+public class DisplayProperties extends ExtensibleData{
+    private String ascendancyNumber;
+    private String birthDate;
+    private String birthPlace;
+    private String deathDate;
+    private String deathPlace;
+    private String descendancyNumber;
+    private String gender;
+    private String lifespan;
+    private String marriageDate;
+    private String marriagePlace;
+    private String name;
 }

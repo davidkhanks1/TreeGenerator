@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author davidkhanks
  */
-public class Person {
+public class Person extends Subject{
     private boolean principal;
     private boolean isPrivate; 
     private Gender gender;

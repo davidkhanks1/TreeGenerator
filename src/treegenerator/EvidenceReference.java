@@ -6,17 +6,13 @@
 
 package treegenerator;
 
-import java.util.Date;
-import java.util.List;
-
 /**
  *
  * @author davidkhanks
  */
-public class Name extends Conclusion{
-    private NameType type;
-    private boolean preferred;
-    private Date date;
-    private List<NameForm> nameForms;
+class EvidenceReference extends HypermediaEnabledData{
+    private String resourceId;
+    private String resource; // The URI to the resource being referenced
+    private Attribution attribution;
     
 }

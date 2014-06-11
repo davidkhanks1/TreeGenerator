@@ -6,17 +6,11 @@
 
 package treegenerator;
 
-import java.util.Date;
-import java.util.List;
-
 /**
  *
  * @author davidkhanks
  */
-public class Name extends Conclusion{
-    private NameType type;
-    private boolean preferred;
-    private Date date;
-    private List<NameForm> nameForms;
-    
+class TextValue {
+    private String lang;
+    private String value;
 }

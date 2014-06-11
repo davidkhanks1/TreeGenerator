@@ -6,17 +6,16 @@
 
 package treegenerator;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  *
  * @author davidkhanks
  */
-public class Name extends Conclusion{
-    private NameType type;
-    private boolean preferred;
-    private Date date;
-    private List<NameForm> nameForms;
+class PlaceReference extends ExtensibleData{
+    private String description;
+    private String original;
+    private List<TextValue> normalized;
+    private List<Field> fields;
     
 }

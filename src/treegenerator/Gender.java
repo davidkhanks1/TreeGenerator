@@ -6,14 +6,16 @@
 
 package treegenerator;
 
-import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
  *
  * @author davidkhanks
  */
-public class Gender {
-    
+public class Gender extends Conclusion {
+    private GenderType type;
+    private List<Field> fields;
 }

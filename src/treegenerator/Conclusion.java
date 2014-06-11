@@ -6,14 +6,19 @@
 
 package treegenerator;
 
+import java.util.List;
+
 /**
  *
  * @author davidkhanks
  */
-public class Conclusion {
+public class Conclusion extends HypermediaEnabledData {
     private ConfidenceLevel confidenceLevel;
     private String lang;
     private Attribution attribution;
+    private List<SourceReference> sources;
+    private ResourceReference analysis;
+    private List<Note> notes;
 
     /**
      * @return the confidenceLevel

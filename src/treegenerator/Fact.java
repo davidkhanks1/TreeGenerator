@@ -6,10 +6,20 @@
 
 package treegenerator;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author davidkhanks
  */
-public class Fact {
+public class Fact extends Conclusion{
+    private boolean primary;
+    private FactType type;
+    private Date date;
+    private PlaceReference place;
+    private String value;
+    private List<Qualifier> qualifiers;
+    private List<Field> fields;
     
 }
