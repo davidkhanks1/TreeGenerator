@@ -11,5 +11,13 @@ package treegenerator;
  * @author David
  */
 public class PersonCreator {
+    public PersonCreator() {
+        
+    }
     
+    public Person createPerson() {
+        Person createdPerson = new Person();
+        
+        return createdPerson;
+    }
 }
