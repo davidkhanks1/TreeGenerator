@@ -26,8 +26,12 @@ public class Person extends Subject{
      * @param firstName the firstName to set
      * @param lastName the lastName to set
      */
-    public Person(String firstName, String lastName) {
+    public Person() {
         
+    }
+    
+    public void addGender(GenderType sex) {
+        Gender gender = new Gender(sex);
     }
 
     
