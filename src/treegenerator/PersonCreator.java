@@ -10,18 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * This class maintains a list of person objects which can then be converted to JSON
  * @author David
  */
 public class PersonCreator {
     
     private List<Person> persons = new ArrayList();
     
+    /**
+     * Constructor
+     */
     public PersonCreator() {
         
     }
     
-    public void createPerson(String genType, String changeMessage) {
+
+    public void createPerson(String givenName, String surname, String genType, String changeMessage) {
         Person createdPerson = new Person();
         Gender gender = new Gender();
         Attribution attr = new Attribution();
@@ -36,8 +40,6 @@ public class PersonCreator {
         PlaceReference place1 = new PlaceReference();
         PlaceReference place2 = new PlaceReference();
         DisplayProperties display = new DisplayProperties();
-        
-        
         List<NameForm> nameForms = new ArrayList();
         
         
@@ -48,6 +50,7 @@ public class PersonCreator {
         } else {
             gender.setType(GenderType.UNKOWN.getGender());
         }
+        
         
         attr.setChangeMessage(changeMessage);
         

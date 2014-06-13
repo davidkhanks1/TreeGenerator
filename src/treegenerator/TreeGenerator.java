@@ -31,26 +31,10 @@ public class TreeGenerator {
     }
     
     public void run() {
-//        Person thisGuy = new Person("David", "Hanks");
-//        Person thisGuysDad = new Person("Kevin", "Hanks");
-//        thisGuy.setFather(thisGuysDad);
-//        thisGuysDad.addChild(thisGuy);
           PersonCreator pc = new PersonCreator();
-          pc.createPerson("Female", "This is a message");
+          pc.createPerson("Anastasia", "Aleksandrova", "Female", "This is a message");
 
-          
-          
-//          
-//          StringBuilder sb = new StringBuilder();
-//          sb.append("{\n\t\"persons\" : [ {\n");
-//          // For each person do the following. A loop will be present here eventually
-//          sb.append("\t\t\"gender\" : {");
-//          sb.append("\t\t\t\"attribution\" : {");
-//          sb.append("\t\t\t\t\"changeMessage\" : ");
-//          sb.append();
-//          String json = sb.toString();
-//          
-//          System.out.println();
+
           Gson gson = new GsonBuilder().setPrettyPrinting().create();
           
           
