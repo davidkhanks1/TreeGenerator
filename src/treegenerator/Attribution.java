@@ -16,5 +16,19 @@ public class Attribution extends ExtensibleData {
     private ResourceReference contributor;
     private Date modified;
     private String changeMessage;
+
+    /**
+     * @return the changeMessage
+     */
+    public String getChangeMessage() {
+        return changeMessage;
+    }
+
+    /**
+     * @param changeMessage the changeMessage to set
+     */
+    public void setChangeMessage(String changeMessage) {
+        this.changeMessage = changeMessage;
+    }
     
 }

@@ -33,4 +33,18 @@ public class Conclusion extends HypermediaEnabledData {
     public void setConfidenceLevel(ConfidenceLevel confidenceLevel) {
         this.confidenceLevel = confidenceLevel;
     }
+
+    /**
+     * @return the attribution
+     */
+    public Attribution getAttribution() {
+        return attribution;
+    }
+
+    /**
+     * @param attribution the attribution to set
+     */
+    public void setAttribution(Attribution attribution) {
+        this.attribution = attribution;
+    }
 }

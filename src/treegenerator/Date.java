@@ -12,30 +12,16 @@ import java.util.List;
  *
  * @author davidkhanks
  */
-class PlaceReference extends ExtensibleData{
-    private String description;
+public class Date extends ExtensibleData {
     private String original;
+    private String formal;
     private List<TextValue> normalized;
     private List<Field> fields;
+
     
-    public PlaceReference() {
+    public Date() {
         
     }
-
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     /**
      * @return the original
      */
@@ -48,6 +34,20 @@ class PlaceReference extends ExtensibleData{
      */
     public void setOriginal(String original) {
         this.original = original;
+    }
+
+    /**
+     * @return the formal
+     */
+    public String getFormal() {
+        return formal;
+    }
+
+    /**
+     * @param formal the formal to set
+     */
+    public void setFormal(String formal) {
+        this.formal = formal;
     }
 
     /**
@@ -77,5 +77,4 @@ class PlaceReference extends ExtensibleData{
     public void setFields(List<Field> fields) {
         this.fields = fields;
     }
-    
 }

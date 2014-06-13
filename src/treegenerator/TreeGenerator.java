@@ -6,6 +6,10 @@
 
 package treegenerator;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +35,39 @@ public class TreeGenerator {
 //        Person thisGuysDad = new Person("Kevin", "Hanks");
 //        thisGuy.setFather(thisGuysDad);
 //        thisGuysDad.addChild(thisGuy);
+          PersonCreator pc = new PersonCreator();
+          pc.createPerson("Female", "This is a message");
+
+          
+          
+//          
+//          StringBuilder sb = new StringBuilder();
+//          sb.append("{\n\t\"persons\" : [ {\n");
+//          // For each person do the following. A loop will be present here eventually
+//          sb.append("\t\t\"gender\" : {");
+//          sb.append("\t\t\t\"attribution\" : {");
+//          sb.append("\t\t\t\t\"changeMessage\" : ");
+//          sb.append();
+//          String json = sb.toString();
+//          
+//          System.out.println();
+          Gson gson = new GsonBuilder().setPrettyPrinting().create();
+          
+          
+          String json = gson.toJson(pc);
+          
+          try {
+              FileWriter writer = new FileWriter("/Users/davidkhanks/Desktop/Person.json");
+              writer.write(json);
+              writer.close();
+              
+            
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
 //        
-//        
+          
+          
 //        System.out.println(thisGuy.getFirstName());
 //        System.out.println("The dad: " + thisGuy.getFather().getFirstName());
 //        try {
@@ -61,17 +96,17 @@ public class TreeGenerator {
 //        }
         
     }
-    
-    
-    public void generatePeople(int count) {
-        if (count > 6) {
-            return;
-        }
-        Person person = new Person("first" + count, "last" + count);
-        personList.add(person);
-//        System.out.println(person.getFirstName());
-            
-        generatePeople(count + 1);
-    }
+//    
+//    
+//    public void generatePeople(int count) {
+//        if (count > 6) {
+//            return;
+//        }
+//        Person person = new Person("first" + count, "last" + count);
+//        personList.add(person);
+////        System.out.println(person.getFirstName());
+//            
+//        generatePeople(count + 1);
+//    }
     
 }

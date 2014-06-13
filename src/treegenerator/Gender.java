@@ -17,24 +17,24 @@ import java.util.Map;
  * @author davidkhanks
  */
 public class Gender extends Conclusion {
-    private GenderType type;
+    private String type;
     private List<Field> fields = new ArrayList();
     
-    public Gender(GenderType type) {
-        this.type = type;
+    public Gender() {
+
     }
 
     /**
      * @return the type
      */
-    public GenderType getType() {
+    public String getType() {
         return type;
     }
 
     /**
      * @param type the type to set
      */
-    public void setType(GenderType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
