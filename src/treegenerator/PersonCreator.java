@@ -25,7 +25,7 @@ public class PersonCreator {
     }
     
 
-    public void createPerson(String givenName, String surname, String genType, String changeMessage) {
+    public void createPerson(String givenName, String surname, String genType, String changeMessage, String birthDate, String birthMonth, String birthYear) {
         Person createdPerson = new Person();
         Gender gender = new Gender();
         Attribution attr = new Attribution();
@@ -45,10 +45,13 @@ public class PersonCreator {
         
         if (genType == "Male" || genType == "male" || genType == "M" || genType == "m") {
             gender.setType(GenderType.MALE.getGender());
+            display.setGender(GenderType.MALE.getGender());
         } else if (genType == "Female" || genType == "female" || genType == "F" || genType == "f") {
             gender.setType(GenderType.FEMALE.getGender());
+            display.setGender(GenderType.FEMALE.getGender());
         } else {
             gender.setType(GenderType.UNKOWN.getGender());
+            display.setGender(GenderType.UNKOWN.getGender());
         }
         
         
@@ -57,10 +60,10 @@ public class PersonCreator {
         name.setAttribution(attr);
         name.setType(NameType.BIRTHNAME.getNameType());
         
-        nameForm.setFullText("Anastasia Aleksandrova");
-        namePart1.setValue("Anastasia");
+        nameForm.setFullText(returnFullName(givenName, surname));
+        namePart1.setValue(givenName);
         namePart1.setType(NamePartType.GIVEN.getNamePartType());
-        namePart2.setValue("Aleksandrova");
+        namePart2.setValue(surname);
         namePart2.setType(NamePartType.SURNAME.getNamePartType());
         
         nameForm.addNamePart(namePart1);
@@ -90,8 +93,8 @@ public class PersonCreator {
         createdPerson.addFact(fact1);
         createdPerson.addFact(fact2);
         
-        display.setName("Anastasia Aleksandrova");
-        display.setGender("Female");
+        display.setName(returnFullName(givenName, surname));
+        
         display.setLifespan("3 Apr 1836 - Dead");
         display.setBirthDate("3 Apr 1836");
         display.setBirthPlace("Moscow, Russia");
@@ -106,5 +109,10 @@ public class PersonCreator {
         
         
         persons.add(createdPerson);
+    }
+    
+    public String returnFullName(String first, String last) {
+        String fullName = first + " " + last;
+        return fullName;
     }
 }
