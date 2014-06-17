@@ -29,13 +29,13 @@ public class TreeGenerator {
     String[] months = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"};
     int[] dates = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
     
-    PersonData[] firstGen = new PersonData[1];
-    PersonData[] secondGen = new PersonData[2];
-    PersonData[] thirdGen = new PersonData[3];
-    PersonData[] fourthGen = new PersonData[4];
-    PersonData[] fifthGen = new PersonData[5];
-    PersonData[] sixthGen = new PersonData[6];
-    PersonData[] seventhGen = new PersonData[7];
+//    PersonData[] firstGen = new PersonData[1];
+//    PersonData[] secondGen = new PersonData[2];
+//    PersonData[] thirdGen = new PersonData[4];
+//    PersonData[] fourthGen = new PersonData[8];
+//    PersonData[] fifthGen = new PersonData[16];
+//    PersonData[] sixthGen = new PersonData[32];
+//    PersonData[] seventhGen = new PersonData[64];
     
     /**
      * @param args the command line arguments
@@ -95,31 +95,46 @@ public class TreeGenerator {
             e.printStackTrace();
         }
         
-        System.out.println(surnames.size());
-        System.out.println(girlsNames.size());
-        System.out.println(boysNames.size());
+        System.out.println("Surname size: " + surnames.size());
+        System.out.println("girlsname size: " + girlsNames.size());
+        System.out.println("boysname size: " + boysNames.size());
         
-        for (int i = 0; i < 128; i++) {
-            String month = months[0 + (int)(Math.random() * ((11 - 0) + 0))];
-            System.out.println(month);
+        for (int i = 0; i < 3; i++) {
             
-            int Date = 1;
-            if (month == "Feb") {
-                Date = 1 + (int)(Math.random() * ((28 - 1) + 1));
-            } else if (month == "Apr" || month == "June" || month == "Sept" || month == "Nov") {
-                Date = 1 + (int)(Math.random() * ((30 - 1) + 1));
-            } else {
-                Date = 1 + (int)(Math.random() * ((31 - 1) + 1));
-            }
+            String month = getRandMonth();
+            int date = getRandDate(month);
             
-            System.out.println(Date);
+            System.out.println(month + " " + date);
             
         }
+        
+        
         
         
         PersonCreator pc = new PersonCreator();
         pc.createPerson("Anastasia", "Aleksandrova", "Female", "This is a message", "3", "Apr", "1836");
         pc.createPerson("Bill", "Cosby", "Male", "This is a message", "12", "July", "1937");
+        
+        List<Person> people = pc.getPersons();
+        
+//        for (int i = 0; i < people.getSize(); i++) {
+//            
+//        }
+        
+        TreeNode basePerson = new TreeNode(people.get(0));
+        TreeNode baseSpouse = new TreeNode(people.get(1));
+        basePerson.setSpouse(baseSpouse);
+        baseSpouse.setSpouse(basePerson);
+        
+        System.out.println(basePerson.getSpouse().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+        System.out.println(basePerson.getSpouse().getPerson().getNames().get(0).getNameForms().get(0).getParts().get(1).getValue());
+        System.out.println(basePerson.getPerson().getFacts().get(0).getDate().getFormal().substring(1));
+        
+        
+        populateTree(0, basePerson, pc);
+        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getMother().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getMother().getPerson().getFacts().get(0).getDate().getFormal().substring(1));
+        
 
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -136,8 +151,7 @@ public class TreeGenerator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        
-          
+
           
 //        System.out.println(thisGuy.getFirstName());
 //        System.out.println("The dad: " + thisGuy.getFather().getFirstName());
@@ -165,6 +179,68 @@ public class TreeGenerator {
 //        for (Person person : personList) {
 //            System.out.println(person);
 //        }
+        
+    }
+    
+    public String getRandMonth() {
+        String month = months[0 + (int)(Math.random() * ((11 - 0) + 1))];
+        return month;
+    }
+    
+    public int getRandDate(String month) {
+        int date = 1;
+        if (month == "Feb") {
+            date = 1 + (int)(Math.random() * ((28 - 1) + 1));
+        } else if (month == "Apr" || month == "June" || month == "Sept" || month == "Nov") {
+            date = 1 + (int)(Math.random() * ((30 - 1) + 1));
+        } else {
+            date = 1 + (int)(Math.random() * ((31 - 1) + 1));
+        }
+        
+        return date;
+    }
+    
+    public void populateTree(int count, TreeNode base, PersonCreator pc) {
+        if (count > 6) {
+            return;
+        }
+        String fatherFirst = boysNames.get(0 + (int)(Math.random() * ((719 - 0) + 1)));
+        String motherFirst = girlsNames.get(0 + (int)(Math.random() * ((719 - 0) + 1)));
+        String surname = surnames.get(0 + (int)(Math.random() * ((1000 - 0) + 1)));
+        
+        String month = getRandMonth();
+        int date = getRandDate(month);
+        
+        String formalYear = base.getPerson().getFacts().get(0).getDate().getFormal().substring(1);
+        int year = Integer.parseInt(formalYear);
+        year = year - (16 + (int)(Math.random() * ((45 - 16) + 1)));
+        String inputYear = Integer.toString(year);
+        
+        String birthDate = Integer.toString(date);
+        
+        if (!base.fatherExists()) {
+            TreeNode father = new TreeNode();
+            father.setPerson(pc.createPerson(fatherFirst, base.getPerson().getNames().get(0).getNameForms().get(0).getParts().get(1).getValue(), "Male", "This is a message", birthDate, month, inputYear));
+            base.setFather(father);
+            populateTree(count + 1, father, pc);
+        }
+        
+        
+        month = getRandMonth();
+        date = getRandDate(month);
+        
+        birthDate = Integer.toString(date);
+        
+        if (!base.motherExists()) {
+            TreeNode mother = new TreeNode();
+            mother.setPerson(pc.createPerson(motherFirst, surname, "Female", "This is a message", birthDate, month, inputYear));
+            base.setMother(mother);
+            populateTree(count + 1, mother, pc);
+        }
+        
+        
+        
+        
         
     }
 //    
