@@ -126,32 +126,20 @@ public class TreeGenerator {
         basePerson.setSpouse(baseSpouse);
         baseSpouse.setSpouse(basePerson);
         
-        System.out.println(basePerson.getSpouse().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
-        System.out.println(basePerson.getSpouse().getPerson().getNames().get(0).getNameForms().get(0).getParts().get(1).getValue());
-        System.out.println(basePerson.getPerson().getFacts().get(0).getDate().getFormal().substring(1));
+//        System.out.println(basePerson.getSpouse().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+//        System.out.println(basePerson.getSpouse().getPerson().getNames().get(0).getNameForms().get(0).getParts().get(1).getValue());
+//        System.out.println(basePerson.getPerson().getFacts().get(0).getDate().getFormal().substring(1));
         
         
         populateTree(0, basePerson, pc);
-        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getMother().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
-        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getMother().getPerson().getFacts().get(0).getDate().getFormal().substring(1));
+//        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getFather().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+//        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getMother().getPerson().getFacts().get(0).getDate().getFormal().substring(1));
+//        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getMother().getPerson().getAnalysis().getResource());
+        printTree(basePerson);
+
+
         
-
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-
-        String json = gson.toJson(pc);
-
-        try {
-            FileWriter writer = new FileWriter("/Users/davidkhanks/Desktop/Person.json");
-            writer.write(json);
-            writer.close();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        JSONPrinter(pc, "Person");
           
 //        System.out.println(thisGuy.getFirstName());
 //        System.out.println("The dad: " + thisGuy.getFather().getFirstName());
@@ -238,10 +226,48 @@ public class TreeGenerator {
             populateTree(count + 1, mother, pc);
         }
         
-        
-        
-        
-        
+        base.getFather().setSpouse(base.getMother());
+        base.getMother().setSpouse(base.getFather());
+      
+    }
+    
+    public void printTree(TreeNode base) {
+        System.out.println("Person: " + base.getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+        System.out.println("   DoB: " + base.getPerson().getFacts().get(0).getDate().getOriginal());
+        System.out.println();
+        System.out.println("Father: " + base.getFather().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+        System.out.println("   DoB: " + base.getFather().getPerson().getFacts().get(0).getDate().getOriginal());
+        System.out.println("Mother: " + base.getFather().getSpouse().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+        System.out.println();
+        System.out.println("GrandFather: " + base.getFather().getFather().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+        System.out.println("        DoB: " + base.getFather().getFather().getPerson().getFacts().get(0).getDate().getOriginal());
+        System.out.println("GrandMother: " + base.getFather().getMother().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+        System.out.println();
+        System.out.println("Mother's Father: " + base.getMother().getFather().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+        System.out.println("Mother's Mother: " + base.getMother().getMother().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+    }
+    
+    
+    /**
+     * Takes any object and creates a JSON string of that object and prints it out to a file
+     * @param obj the Object to be printed to a JSON file
+     * @param fileName the name of the file without the extension 
+     */
+    public void JSONPrinter(Object obj, String fileName) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+
+        String json = gson.toJson(obj);
+
+        try {
+            FileWriter writer = new FileWriter("/Users/davidkhanks/Desktop/" + fileName + ".json");
+            writer.write(json);
+            writer.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 //    
 //    

@@ -17,4 +17,32 @@ public class ResourceReference {
     public ResourceReference() {
         
     }
+
+    /**
+     * @return the resourceId
+     */
+    public String getResourceId() {
+        return resourceId;
+    }
+
+    /**
+     * @param resourceId the resourceId to set
+     */
+    public void setResourceId(String resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    /**
+     * @return the resource
+     */
+    public String getResource() {
+        return resource;
+    }
+
+    /**
+     * @param resource the resource to set
+     */
+    public void setResource(String resource) {
+        this.resource = resource;
+    }
 }
