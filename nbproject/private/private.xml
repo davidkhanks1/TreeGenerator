@@ -7,15 +7,21 @@
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/FieldType.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/TreeNode.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/Date.java</file>
+            <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/ResourceReference.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/Name.java</file>
+            <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/Subject.java</file>
+            <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/Conclusion.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/TextValue.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/PersonCreator.java</file>
+            <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/Fact.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/GenderType.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/TreeGenerator.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/DisplayProperties.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/NamePart.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/PersonData.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/Person.java</file>
+            <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/Relationship.java</file>
+            <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/RelationshipType.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/PlaceReference.java</file>
             <file>file:/Users/davidkhanks/NetBeansProjects/TreeGenerator/src/treegenerator/Gender.java</file>
         </group>

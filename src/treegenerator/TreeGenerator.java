@@ -95,18 +95,18 @@ public class TreeGenerator {
             e.printStackTrace();
         }
         
-        System.out.println("Surname size: " + surnames.size());
-        System.out.println("girlsname size: " + girlsNames.size());
-        System.out.println("boysname size: " + boysNames.size());
+//        System.out.println("Surname size: " + surnames.size());
+//        System.out.println("girlsname size: " + girlsNames.size());
+//        System.out.println("boysname size: " + boysNames.size());
         
-        for (int i = 0; i < 3; i++) {
-            
-            String month = getRandMonth();
-            int date = getRandDate(month);
-            
-            System.out.println(month + " " + date);
-            
-        }
+//        for (int i = 0; i < 3; i++) {
+//            
+//            String month = getRandMonth();
+//            int date = getRandDate(month);
+//            
+//            System.out.println(month + " " + date);
+//            
+//        }
         
         
         
@@ -232,19 +232,26 @@ public class TreeGenerator {
     }
     
     public void printTree(TreeNode base) {
+        boolean printFather = false;
+        boolean printMother = false;
+        
         System.out.println("Person: " + base.getPerson().getNames().get(0).getNameForms().get(0).getFullText());
-        System.out.println("   DoB: " + base.getPerson().getFacts().get(0).getDate().getOriginal());
+        if(base.fatherExists()) {
+            System.out.println("Father: " + base.getFather().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+            printFather = true;
+        }
+        
+        if(base.motherExists()) {
+            System.out.println("Mother: " + base.getMother().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+            printMother = false;
+        }
+        
         System.out.println();
-        System.out.println("Father: " + base.getFather().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
-        System.out.println("   DoB: " + base.getFather().getPerson().getFacts().get(0).getDate().getOriginal());
-        System.out.println("Mother: " + base.getFather().getSpouse().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
-        System.out.println();
-        System.out.println("GrandFather: " + base.getFather().getFather().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
-        System.out.println("        DoB: " + base.getFather().getFather().getPerson().getFacts().get(0).getDate().getOriginal());
-        System.out.println("GrandMother: " + base.getFather().getMother().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
-        System.out.println();
-        System.out.println("Mother's Father: " + base.getMother().getFather().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
-        System.out.println("Mother's Mother: " + base.getMother().getMother().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
+        if(printFather || printMother) {
+            printTree(base.getFather());
+            printTree(base.getMother());
+        }
+        
     }
     
     
