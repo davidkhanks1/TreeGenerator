@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package treegenerator;
+package org.familysearch.mobile.client;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,13 +33,7 @@ public class TreeGenerator {
     String[] months = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"};
     int[] dates = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
     
-//    PersonData[] firstGen = new PersonData[1];
-//    PersonData[] secondGen = new PersonData[2];
-//    PersonData[] thirdGen = new PersonData[4];
-//    PersonData[] fourthGen = new PersonData[8];
-//    PersonData[] fifthGen = new PersonData[16];
-//    PersonData[] sixthGen = new PersonData[32];
-//    PersonData[] seventhGen = new PersonData[64];
+
     
     /**
      * @param args the command line arguments
@@ -321,17 +315,6 @@ public class TreeGenerator {
         // TODO Jersey call to the API passing a JSON relationship string and getting the created PID from the response
         
     }
-//    
-//    
-//    public void generatePeople(int count) {
-//        if (count > 6) {
-//            return;
-//        }
-//        Person person = new Person("first" + count, "last" + count);
-//        personList.add(person);
-////        System.out.println(person.getFirstName());
-//            
-//        generatePeople(count + 1);
-//    }
+
     
 }

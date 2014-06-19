@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package treegenerator;
+package org.familysearch.mobile.client;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
