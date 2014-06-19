@@ -117,10 +117,7 @@ public class TreeGenerator {
         
         List<Person> people = pc.getPersons();
         
-//        for (int i = 0; i < people.getSize(); i++) {
-//            
-//        }
-        
+
         TreeNode basePerson = new TreeNode(people.get(0));
         TreeNode baseSpouse = new TreeNode(people.get(1));
         basePerson.setSpouse(baseSpouse);
@@ -131,42 +128,17 @@ public class TreeGenerator {
 //        System.out.println(basePerson.getPerson().getFacts().get(0).getDate().getFormal().substring(1));
         
         
-        populateTree(0, basePerson, pc);
+        
 //        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getFather().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
 //        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getMother().getPerson().getFacts().get(0).getDate().getFormal().substring(1));
 //        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getMother().getPerson().getAnalysis().getResource());
+        populateTree(2, basePerson, pc);
         printTree(basePerson);
 
 
         
         JSONPrinter(pc, "Person");
           
-//        System.out.println(thisGuy.getFirstName());
-//        System.out.println("The dad: " + thisGuy.getFather().getFirstName());
-//        try {
-//            System.out.println("The dad's dad: " + thisGuy.getFather().getFather().getFirstName());
-//        } catch(NullPointerException e) {
-//            System.out.println("The dad's dad is currently unkown");
-//        }
-//        System.out.println("The dad's children: ");
-//        for(Person child : thisGuysDad.getChildren()) {
-//            System.out.println(child.getFirstName());
-//        }
-//        
-        
-//        Conclusion conc = new Conclusion();
-//        
-//        conc.setConfidenceLevel(ConfidenceLevel.LOW);
-//        
-//        String conf = conc.getConfidenceLevel().getConfidenceLevel();
-//        
-//        System.out.println(conf);
-        
-//        generatePeople(0);
-//        
-//        for (Person person : personList) {
-//            System.out.println(person);
-//        }
         
     }
     
@@ -189,7 +161,8 @@ public class TreeGenerator {
     }
     
     public void populateTree(int count, TreeNode base, PersonCreator pc) {
-        if (count > 6) {
+        
+        if (count < 1) {
             return;
         }
         String fatherFirst = boysNames.get(0 + (int)(Math.random() * ((719 - 0) + 1)));
@@ -210,7 +183,7 @@ public class TreeGenerator {
             TreeNode father = new TreeNode();
             father.setPerson(pc.createPerson(fatherFirst, base.getPerson().getNames().get(0).getNameForms().get(0).getParts().get(1).getValue(), "Male", "This is a message", birthDate, month, inputYear));
             base.setFather(father);
-            populateTree(count + 1, father, pc);
+            populateTree(count - 1, father, pc);
         }
         
         
@@ -223,7 +196,7 @@ public class TreeGenerator {
             TreeNode mother = new TreeNode();
             mother.setPerson(pc.createPerson(motherFirst, surname, "Female", "This is a message", birthDate, month, inputYear));
             base.setMother(mother);
-            populateTree(count + 1, mother, pc);
+            populateTree(count - 1, mother, pc);
         }
         
         base.getFather().setSpouse(base.getMother());
