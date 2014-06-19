@@ -15,6 +15,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.familysearch.platform.ct.json.*;
+import org.gedcomx.conclusion.json.*;
 
 /**
  * Generates the JSON needed to make a request to create persons
@@ -132,21 +134,36 @@ public class TreeGenerator {
 //        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getFather().getPerson().getNames().get(0).getNameForms().get(0).getFullText());
 //        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getMother().getPerson().getFacts().get(0).getDate().getFormal().substring(1));
 //        System.out.println(basePerson.getFather().getFather().getFather().getFather().getFather().getFather().getMother().getPerson().getAnalysis().getResource());
-        populateTree(2, basePerson, pc);
+        populateTree(6, basePerson, pc);
         printTree(basePerson);
 
 
         
         JSONPrinter(pc, "Person");
+        
+        for (int i = 0; i < pc.getPersons().size(); i++) {
+            System.out.println("Name: " + pc.getPersons().get(i).getNames().get(0).getNameForms().get(0).getFullText());
+            createPersonAPICall(pc.getPersons().get(i));
+            System.out.println("ResourceID: " + pc.getPersons().get(i).getAnalysis().getResourceId());
+        }
           
         
     }
     
+    /**
+     * Randomly selects a month and returns it as a string
+     * @return month the randomly chosen month
+     */
     public String getRandMonth() {
         String month = months[0 + (int)(Math.random() * ((11 - 0) + 1))];
         return month;
     }
     
+    /**
+     * Randomly returns a date based on the month that was passed in as a parameter
+     * @param month the month is needed to know where the limit is i.e. February only has 28 days
+     * @return 
+     */
     public int getRandDate(String month) {
         int date = 1;
         if (month == "Feb") {
@@ -160,13 +177,22 @@ public class TreeGenerator {
         return date;
     }
     
+    /**
+     * Recursively generates a pedigree, given a person to start with and the number of generations to run
+     * @param count the number of generations that are desired
+     * @param base the starting person of the pedigree
+     * @param pc the person creator object that creates each person and adds each person object
+     * to its list as to be able to iterate quickly through all people in the pedigree
+     */
     public void populateTree(int count, TreeNode base, PersonCreator pc) {
         
         if (count < 1) {
             return;
         }
         String fatherFirst = boysNames.get(0 + (int)(Math.random() * ((719 - 0) + 1)));
+        fatherFirst = fatherFirst.replace("\"", "");
         String motherFirst = girlsNames.get(0 + (int)(Math.random() * ((719 - 0) + 1)));
+        motherFirst = motherFirst.replace("\"", "");
         String surname = surnames.get(0 + (int)(Math.random() * ((1000 - 0) + 1)));
         
         String month = getRandMonth();
@@ -204,6 +230,10 @@ public class TreeGenerator {
       
     }
     
+    /**
+     * Prints out all generations in the pedigree given a TreeNode obj
+     * @param base the starting node
+     */
     public void printTree(TreeNode base) {
         boolean printFather = false;
         boolean printMother = false;
@@ -248,6 +278,44 @@ public class TreeGenerator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void createPersonAPICall(Person p) {
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(p);
+        // TODO Jersey call to the API passing a JSON string and getting the created PID from the response
+        int n1 = 0 + (int)(Math.random() * ((9 - 0) + 1));
+        String num1 = Integer.toString(n1);
+        int n2 = 0 + (int)(Math.random() * ((9 - 0) + 1));
+        String num2 = Integer.toString(n2);
+        int n3 = 0 + (int)(Math.random() * ((9 - 0) + 1));
+        String num3 = Integer.toString(n3);
+        String response = "TEST-" + num1 + num2 + num3;
+        
+        try {
+            p.getAnalysis().setResource("https://familysearch.org/platform/tree/persons/" + response);
+            p.getAnalysis().setResourceId(response);
+        } catch(NullPointerException e) {
+            ResourceReference rr = new ResourceReference();
+            p.setAnalysis(rr);
+            p.getAnalysis().setResource("https://familysearch.org/platform/tree/persons/" + response);
+            p.getAnalysis().setResourceId(response);
+        }
+        
+        
+    }
+    
+    public void createRelationshipAPICall(Person p1, Person p2) {
+        Relationship rel = new Relationship();
+        rel.setType(RelationshipType.COUPLE.getRelationshipType());
+        rel.setPerson1(p1.getAnalysis());
+        rel.setPerson2(p2.getAnalysis());
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(rel);
+        // TODO Jersey call to the API passing a JSON relationship string and getting the created PID from the response
+        
     }
 //    
 //    

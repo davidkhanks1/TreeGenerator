@@ -16,8 +16,6 @@ import java.util.Map;
  * @author David
  */
 public class PersonCreator {
-    private LinkedHashMap monthMap = new LinkedHashMap();
-    
     
     private List<Person> persons = new ArrayList();
     
@@ -25,10 +23,20 @@ public class PersonCreator {
      * Constructor
      */
     public PersonCreator() {
-        monthMap.put("Jan", "01");
+
     }
     
-
+    /**
+     * Creates a person and puts them in the PersonCreator list of persons
+     * @param givenName the given name of the person
+     * @param surname the last or surname of the person
+     * @param genType the gender of the person, Java Enum
+     * @param changeMessage the message; this is currently implemented in a simple form as to not make the project unnecessarily complex for the time being
+     * @param birthDate the date of the month of birth
+     * @param birthMonth the month of birth
+     * @param birthYear the year of birth
+     * @return person object
+     */
     public Person createPerson(String givenName, String surname, String genType, String changeMessage, String birthDate, String birthMonth, String birthYear) {
         
         Person createdPerson = new Person();
@@ -117,13 +125,19 @@ public class PersonCreator {
         return createdPerson;
     }
     
-    public String returnFullName(String first, String last) {
+    /**
+     * Concatenates the first and last names to make the full name value less cluttered in the createPerson() method
+     * @param first the first name
+     * @param last the last name
+     * @return fullName
+     */
+    private String returnFullName(String first, String last) {
         String fullName = first + " " + last;
         return fullName;
     }
 
-    /**
-     * @return the persons
+    /** Returns the list of persons
+     * @return the persons list
      */
     public List<Person> getPersons() {
         return persons;

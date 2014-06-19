@@ -13,7 +13,7 @@ import java.util.List;
  * @author davidkhanks
  */
 public class Relationship extends Subject{
-    private RelationshipType type;
+    private String type;
     private ResourceReference person1;
     private ResourceReference person2;
     private List<Fact> facts;
@@ -26,14 +26,14 @@ public class Relationship extends Subject{
     /**
      * @return the type
      */
-    public RelationshipType getType() {
+    public String getType() {
         return type;
     }
 
     /**
      * @param type the type to set
      */
-    public void setType(RelationshipType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
