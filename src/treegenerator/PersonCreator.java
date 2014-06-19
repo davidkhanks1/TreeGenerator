@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.gedcomx.common.json.*;
+import org.gedcomx.conclusion.json.*;
+import org.gedcomx.types.json.*;
 
 /**
  * This class maintains a list of person objects which can then be converted to JSON
@@ -54,41 +57,47 @@ public class PersonCreator {
         PlaceReference place2 = new PlaceReference();
         DisplayProperties display = new DisplayProperties();
         List<NameForm> nameForms = new ArrayList();
+        List<NamePart> nameParts = new ArrayList();
+        List<Name> names = new ArrayList();
+        List<Fact> facts = new ArrayList();
         
         
         if (genType == "Male" || genType == "male" || genType == "M" || genType == "m") {
-            gender.setType(GenderType.MALE.getGender());
-            display.setGender(GenderType.MALE.getGender());
+            gender.setType(GenderType.Male.toString());
+            display.setGender(GenderType.Male.toString());
         } else if (genType == "Female" || genType == "female" || genType == "F" || genType == "f") {
-            gender.setType(GenderType.FEMALE.getGender());
-            display.setGender(GenderType.FEMALE.getGender());
+            gender.setType(GenderType.Female.toString());
+            display.setGender(GenderType.Female.toString());
         } else {
-            gender.setType(GenderType.UNKOWN.getGender());
-            display.setGender(GenderType.UNKOWN.getGender());
+            gender.setType(GenderType.Unknown.toString());
+            display.setGender(GenderType.Unknown.toString());
         }
         
         
         attr.setChangeMessage(changeMessage);
         
         name.setAttribution(attr);
-        name.setType(NameType.BIRTHNAME.getNameType());
+        name.setType(NameType.BirthName.toString());
         
         nameForm.setFullText(returnFullName(givenName, surname));
         namePart1.setValue(givenName);
-        namePart1.setType(NamePartType.GIVEN.getNamePartType());
+        namePart1.setType(NamePartType.Given.toString());
         namePart2.setValue(surname);
-        namePart2.setType(NamePartType.SURNAME.getNamePartType());
+        namePart2.setType(NamePartType.Surname.toString());
         
-        nameForm.addNamePart(namePart1);
-        nameForm.addNamePart(namePart2);
+        nameParts.add(namePart1);
+        nameParts.add(namePart2);
+        nameForm.setParts(nameParts);
         
         nameForms.add(nameForm);
         
         name.setNameForms(nameForms);
-        createdPerson.addName(name);
+        names.add(name);
+        createdPerson.setNames(names);
+
         
         fact1.setAttribution(attr);
-        fact1.setType(FactType.BIRTH.getFactType());
+        fact1.setType(FactType.Birth.toString());
         date1.setOriginal(birthDate + " " + birthMonth + " " + birthYear);
         date1.setFormal("+" + birthYear);
         place1.setOriginal("Moscow, Russia");
@@ -96,15 +105,17 @@ public class PersonCreator {
         fact1.setPlace(place1);
         
         fact2.setAttribution(attr);
-        fact2.setType(FactType.RESIDENCE.getFactType());
+        fact2.setType(FactType.Residence.toString());
         date2.setOriginal(birthDate + " " + birthMonth + " " + birthYear);
         date2.setFormal("+1836-04-13");
         place2.setOriginal("Moscow, Russia");
         fact2.setDate(date2);
         fact2.setPlace(place2);
         
-        createdPerson.addFact(fact1);
-        createdPerson.addFact(fact2);
+        facts.add(fact1);
+        facts.add(fact2);
+        
+        createdPerson.setFacts(facts);
         
         display.setName(returnFullName(givenName, surname));
         
@@ -112,7 +123,7 @@ public class PersonCreator {
         display.setBirthDate(birthDate + " " + birthMonth + " " + birthYear);
         display.setBirthPlace("Moscow, Russia");
         
-        createdPerson.setDisplay(display);
+        createdPerson.setDisplayExtension(display);
         
         
         

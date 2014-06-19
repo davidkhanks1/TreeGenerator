@@ -8,6 +8,7 @@ package treegenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.gedcomx.conclusion.json.*;
 
 /**
  *

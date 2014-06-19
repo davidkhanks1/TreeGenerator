@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.familysearch.platform.ct.json.*;
 import org.gedcomx.conclusion.json.*;
+import org.gedcomx.common.json.*;
+import org.gedcomx.types.json.*;
 
 /**
  * Generates the JSON needed to make a request to create persons
@@ -268,6 +270,8 @@ public class TreeGenerator {
 
 
         String json = gson.toJson(obj);
+        
+        json.replace("g", "G");
 
         try {
             FileWriter writer = new FileWriter("/Users/davidkhanks/Desktop/" + fileName + ".json");
@@ -308,7 +312,7 @@ public class TreeGenerator {
     
     public void createRelationshipAPICall(Person p1, Person p2) {
         Relationship rel = new Relationship();
-        rel.setType(RelationshipType.COUPLE.getRelationshipType());
+        rel.setType(RelationshipType.Couple.toString());
         rel.setPerson1(p1.getAnalysis());
         rel.setPerson2(p2.getAnalysis());
         
